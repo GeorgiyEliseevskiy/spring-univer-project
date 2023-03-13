@@ -3,9 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.Models.Student;
 import com.example.demo.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +18,32 @@ public class StudentController {
         this.service = service;
     }
 
+    public StudentController() {
+        service = null;
+    }
 
     @GetMapping
     public List<Student> findAllStudents() {
         return service.findAllStudents();
+    }
+
+    @PostMapping
+    public Student save(@RequestBody Student student) {
+        return service.save(student);
+    }
+
+    @GetMapping("/{email}")
+    public Student findByEmail(@PathVariable("email") String em) {
+        return service.findByEmail(em);
+    }
+
+    @PutMapping
+    public Student updateStudent(@RequestBody Student student) {
+        return service.update(student);
+    }
+
+    @DeleteMapping("/{email}")
+    public void delete(@PathVariable("email") String email) {
+        service.delete(email);
     }
 }

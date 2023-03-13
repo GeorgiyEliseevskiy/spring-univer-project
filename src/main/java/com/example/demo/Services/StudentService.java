@@ -1,22 +1,17 @@
 package com.example.demo.Services;
 
 import com.example.demo.Models.Student;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.util.List;
 
-@Service
-public class StudentService {
+@Component
+public interface StudentService {
+    List<Student> findAllStudents();
 
-
-    public List<Student> findAllStudents() {
-        return List.of(
-                new Student("Andrey", "Kolobov",
-                        LocalDate.now(), "gel@list.ru", 18),
-                new Student("Kate", "Maksimova",
-                        LocalDate.now(), "maks@mail.ru", 19)
-        );
-    }
+    Student save(Student s);
+    Student findByEmail(String email);
+    Student update(Student s);
+    void delete(String email);
 }
 
